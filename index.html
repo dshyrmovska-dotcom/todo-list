@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="styles.css" />
+        <title>TODO list</title>
+    </head>
+    <body>
+        <div class="todo-wrapper">
+            <div class="text-wrapper">
+                <input id="todoInput" type="text" />
+                <button onclick="addFunc()" class="add-button">Add</button>
+            </div>
+            <div class="todo-list">
+                <!-- <section class="list-element">
+                    <p>smthgggggggggggggggggggggggggggg</p>
+                    <button class="delete-button">
+                        <img src="edit.png"/>
+                        <img src="trash.png" />
+                    </button>
+                </section> -->
+            </div>
+        </div>
+        <script>
+            // childNode¿
+
+            //todolist i section
+            function addFunc() {
+                const input = document.getElementById("todoInput");
+                const text = input.value.trim();
+
+                const section = document.createElement("section");
+                section.className = "list-element";
+                const p = document.createElement("p");
+                p.textContent = text;
+
+                const deleteBtn = document.createElement("button");
+                deleteBtn.className = "deleteBtn";
+                deleteBtn.onclick = function () {
+                    section.remove();
+                };
+                const img = document.createElement("img");
+                img.src = "trash.png";
+
+                section.appendChild(p);
+                section.appendChild(deleteBtn);
+                deleteBtn.appendChild(img);
+
+                document.querySelector(".todo-list").appendChild(section);
+            }
+        </script>
+    </body>
+</html>

@@ -35,6 +35,7 @@ input {
 .todo-list {
     width: 100%;
     display: flex;
+    flex-direction: column;
 
     justify-content: center;
 }
@@ -50,7 +51,18 @@ input {
 
     border-radius: 5px;
 }
+.action-wrapper {
+    display: flex;
+    gap: 10px;
+}
+
 .deleteBtn {
+    background-color: rgb(136, 74, 194);
+    border: 0px;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+.editBtn {
     background-color: rgb(136, 74, 194);
     border: 0px;
     border-radius: 5px;
@@ -67,4 +79,8 @@ img {
 .deleteBtn:hover {
     background-color: rgb(64, 64, 64);
     cursor: not-allowed;
+}
+.editBtn:hover {
+    background-color: rgb(64, 64, 64);
+    cursor: text;
 }

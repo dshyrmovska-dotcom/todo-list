@@ -23,53 +23,68 @@
             </div>
         </div>
         <script>
-            // childNode¿
-
-            //todolist i section
             function addFunc() {
                 const input = document.getElementById("todoInput");
                 const text = input.value.trim();
+                if (!text) return;
 
+                const todoItem = createTodoItem(text);
+                document.querySelector(".todo-list").appendChild(todoItem);
+
+                input.value = "";
+            }
+
+            function createTodoItem(text) {
                 const section = document.createElement("section");
                 section.className = "list-element";
+
                 const p = document.createElement("p");
                 p.textContent = text;
 
-                const deleteBtn = document.createElement("button");
-                deleteBtn.className = "deleteBtn";
+                const actionWrapper = document.createElement("div");
+                actionWrapper.className = "action-wrapper";
 
-                const editBtn = document.createElement("button");
-                editBtn.className = "editBtn";
-                editBtn.addEventListener("click", () => editFunc(p));
+                actionWrapper.appendChild(createEditButton(p));
+                actionWrapper.appendChild(createDeleteButton());
 
-                const editImg = document.createElement("img");
-                editImg.src = "/images/edit.png";
+                section.appendChild(p);
+                section.appendChild(actionWrapper);
 
-                editBtn.appendChild(editImg);
+                return section;
+            }
+
+            function createEditButton(paragraph) {
+                const btn = document.createElement("button");
+                btn.className = "editBtn";
+                btn.addEventListener("click", () => editFunc(paragraph));
+
+                const img = document.createElement("img");
+                img.src = "/images/edit.png";
+
+                btn.appendChild(img);
+                return btn;
+            }
+
+            function createDeleteButton() {
+                const btn = document.createElement("button");
+                btn.className = "deleteBtn";
+                btn.addEventListener("click", deleteFunc);
 
                 const img = document.createElement("img");
                 img.src = "/images/trash.png";
-                deleteBtn.addEventListener("click", deleteFunc);
-                const actionwrapper = document.createElement("div");
-                actionwrapper.className = "action-wrapper";
 
-                actionwrapper.appendChild(editBtn);
-                actionwrapper.appendChild(deleteBtn);
-
-                section.appendChild(p);
-                section.appendChild(actionwrapper);
-
-                deleteBtn.appendChild(img);
-
-                document.querySelector(".todo-list").appendChild(section);
+                btn.appendChild(img);
+                return btn;
             }
-            function editFunc(p) {
-                const newText = prompt("change", p.textContent);
-                if (newText !== null && newText.trim() !== "") {
-                    p.textContent = newText;
+
+            function editFunc(paragraph) {
+                const newText = prompt("change", paragraph.textContent);
+                if (newText && newText.trim() !== "") {
+                    paragraph.textContent = newText;
                 }
             }
-            function deleteFunc() {
+
+            function deleteFunc(event) {
                 const section = event.target.closest(".list-element");
                 section.remove();
             }

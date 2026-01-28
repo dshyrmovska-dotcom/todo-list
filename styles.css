@@ -84,3 +84,6 @@ img {
     background-color: rgb(64, 64, 64);
     cursor: text;
 }
+p {
+    white-space: pre;
+}

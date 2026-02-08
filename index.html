@@ -44,7 +44,7 @@
                 const actionWrapper = document.createElement("div");
                 actionWrapper.className = "action-wrapper";
 
-                actionWrapper.appendChild(createEditButton(p));
+                actionWrapper.appendChild(createEditButton());
                 actionWrapper.appendChild(createDeleteButton());
 
                 section.appendChild(p);
@@ -53,10 +53,10 @@
                 return section;
             }
 
-            function createEditButton(paragraph) {
+            function createEditButton() {
                 const btn = document.createElement("button");
                 btn.className = "editBtn";
-                btn.addEventListener("click", () => editFunc(paragraph));
+                btn.addEventListener("click", editFunc);
 
                 const img = document.createElement("img");
                 img.src = "/images/edit.png";
@@ -77,7 +77,10 @@
                 return btn;
             }
 
-            function editFunc(paragraph) {
+            function editFunc(event) {
+                const section = event.target.closest(".list-element");
+                const paragraph = section.querySelector("p");
+
                 const newText = prompt("change", paragraph.textContent);
                 if (newText && newText.trim() !== "") {
                     paragraph.textContent = newText;
